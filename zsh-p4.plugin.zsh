@@ -1,3 +1,4 @@
+#!/bin/zsh
 # Attempt at making a prompt which automatically gives p4 branch, status etc.
 # Idea:
 #   Use p4 info to figure out if we are in a p4 client
