@@ -7,7 +7,7 @@
 #   Use $ZSH_THEME_GIT* settings for a consistent look and feel
 function p4_prompt_info() {
   # If we are not in a p4 client get out
-  if ! p4 client -o; then
+  if ! p4 client -o &> /dev/null; then
     return 0
   fi
   # Get 'Branch' info
