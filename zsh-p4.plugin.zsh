@@ -14,6 +14,7 @@ function p4_prompt_info() {
   local ref
   ref=$(p4 client -o | grep // | tail -n 1 | cut -d / -f 5 2> /dev/null) || return 0
 
+  # Todo: Integrate p4 sync info into upstream
   local upstream
 
   echo "${ZSH_THEME_GIT_PROMPT_PREFIX}${ref:gs/%/%%}${upstream:gs/%/%%}$(parse_p4_dirty)${ZSH_THEME_GIT_PROMPT_SUFFIX}"
