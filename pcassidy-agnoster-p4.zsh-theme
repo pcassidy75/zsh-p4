@@ -1,3 +1,4 @@
+
 # vim:ft=zsh ts=2 sw=2 sts=2
 #
 # agnoster's Theme - https://gist.github.com/3712874
@@ -207,6 +208,9 @@ prompt_dir() {
   prompt_segment blue $CURRENT_FG '%~'
 }
 
+prompt_enddir() {
+  prompt_segment blue $CURRENT_FG '%1~'
+}
 # Virtualenv: current working virtualenv
 prompt_virtualenv() {
   local virtualenv_path="$VIRTUAL_ENV"
@@ -270,7 +274,7 @@ build_prompt() {
   prompt_virtualenv
   prompt_aws
   prompt_context
-  prompt_dir
+  prompt_enddir
   prompt_git
   prompt_p4
   prompt_bzr
