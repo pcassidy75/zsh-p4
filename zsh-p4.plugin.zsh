@@ -10,6 +10,7 @@ function p4_prompt_info() {
 
 # Get 'Branch' info (fifth field from //<depot>/<product>/<branch>)
   local ref
+  # weird redirects need to preserve exit status from p4 client (better way?)
   ref=$(grep '//' < <(p4 client -o 2> /dev/null) > >(tail -n 1 | cut -d / -f 5)) || return 0
 
   # Todo: Integrate p4 sync info into upstream
