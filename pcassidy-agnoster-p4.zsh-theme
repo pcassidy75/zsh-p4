@@ -254,6 +254,7 @@ prompt_p4() {
   # weird redirects need to preserve exit status from p4 client (better way?)
   branch=$(grep '//' < <(p4 client -o 2> /dev/null) > >(tail -n 1 | cut -d / -f 5)) || return 0
 
+  dirty=$(parse_p4_dirty)
   if [[ -n $dirty ]]; then
     prompt_segment yellow black
   else
