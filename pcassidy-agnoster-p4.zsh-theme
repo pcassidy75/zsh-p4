@@ -242,6 +242,27 @@ prompt_aws() {
   esac
 }
 
+prompt_p4() {
+
+  local PL_BRANCH_CHAR
+  () {
+    local LC_ALL="" LC_CTYPE="en_US.UTF-8"
+    PL_BRANCH_CHAR=$'\ue0a0'         # 
+  }
+  # Get 'Branch' info (fifth field from //<depot>/<product>/<branch>)
+  local branch dirty
+  # weird redirects need to preserve exit status from p4 client (better way?)
+  branch=$(grep '//' < <(p4 client -o 2> /dev/null) > >(tail -n 1 | cut -d / -f 5)) || return 0
+
+  if [[ -n $dirty ]]; then
+    prompt_segment yellow black
+  else
+    prompt_segment green $CURRENT_FG
+  fi
+
+  echo -n "${branch} $PL_BRANCH_CHAR"
+}
+
 ## Main prompt
 build_prompt() {
   RETVAL=$?
@@ -251,6 +272,7 @@ build_prompt() {
   prompt_context
   prompt_dir
   prompt_git
+  prompt_p4
   prompt_bzr
   prompt_hg
   prompt_end
